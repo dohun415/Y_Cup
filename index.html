@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>인하대학교 여의주배 축구대회</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #10233c;
+      --sub: #5d728c;
+      --line: #d7e7f6;
+      --paper: #f4fbff;
+      --panel: rgba(255, 255, 255, .92);
+      --sky: #71c7f4;
+      --blue: #1269bd;
+      --deep: #073d78;
+      --navy: #08294f;
+      --aqua: #d9f3ff;
+      --cloud: rgba(255, 255, 255, .78);
+      --gold: #e8b84c;
+      --red: #e25156;
+      --shadow: 0 20px 55px rgba(10, 66, 120, .14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      background:
+        radial-gradient(circle at 12% 6%, rgba(255,255,255,.95) 0 62px, transparent 63px),
+        radial-gradient(circle at 22% 10%, rgba(255,255,255,.72) 0 42px, transparent 43px),
+        radial-gradient(circle at 88% 18%, rgba(255,255,255,.86) 0 78px, transparent 79px),
+        linear-gradient(180deg, #cbf0ff 0%, #f6fcff 430px, #eef8ff 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      width: 900px;
+      height: 260px;
+      left: -120px;
+      top: 235px;
+      border-radius: 50%;
+      border-top: 34px solid rgba(59, 164, 224, .28);
+      border-right: 20px solid rgba(255,255,255,.7);
+      transform: rotate(-9deg);
+      filter: blur(.2px);
+    }
+
+    body::after {
+      width: 980px;
+      height: 240px;
+      right: -300px;
+      top: 92px;
+      border-radius: 50%;
+      border-bottom: 30px solid rgba(18, 105, 189, .22);
+      border-left: 18px solid rgba(255,255,255,.72);
+      transform: rotate(-14deg);
+    }
+
+    img { display: block; max-width: 100%; }
+    button, input { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    .hero {
+      position: relative;
+      min-height: 455px;
+      display: grid;
+      align-items: center;
+      padding: 48px 0 70px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 54px -8vw auto auto;
+      width: min(56vw, 710px);
+      height: 210px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 11% 52%, var(--cloud) 0 46px, transparent 47px),
+        radial-gradient(circle at 26% 42%, rgba(255,255,255,.9) 0 70px, transparent 71px),
+        radial-gradient(circle at 48% 54%, rgba(255,255,255,.8) 0 58px, transparent 59px),
+        radial-gradient(circle at 68% 43%, rgba(255,255,255,.88) 0 76px, transparent 77px),
+        radial-gradient(circle at 86% 59%, rgba(255,255,255,.72) 0 44px, transparent 45px);
+      opacity: .88;
+    }
+
+    .dragon-tail {
+      position: absolute;
+      left: 36%;
+      top: 100px;
+      width: min(58vw, 720px);
+      height: 180px;
+      border: solid rgba(11, 115, 200, .34);
+      border-width: 0 0 20px 0;
+      border-radius: 0 0 72% 50%;
+      transform: rotate(-8deg);
+      filter: drop-shadow(0 18px 18px rgba(16, 99, 175, .08));
+    }
+
+    .dragon-tail::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      bottom: -20px;
+      width: 62px;
+      height: 34px;
+      background: linear-gradient(135deg, rgba(18,105,189,.5), rgba(255,255,255,.1));
+      clip-path: polygon(0 50%, 100% 0, 76% 50%, 100% 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid rgba(18, 105, 189, .22);
+      background: rgba(255,255,255,.58);
+      color: var(--deep);
+      font-size: 13px;
+      font-weight: 900;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 0;
+      max-width: 820px;
+      font-size: clamp(48px, 8vw, 94px);
+      line-height: .94;
+      font-weight: 950;
+      color: var(--navy);
+      word-break: keep-all;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 660px;
+      margin: 22px 0 0;
+      color: #334d6e;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.7;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+
+    .hero-stats {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 150px));
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      min-height: 90px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(18,105,189,.16);
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(15, 84, 150, .09);
+    }
+
+    .stat b { display: block; font-size: 31px; line-height: 1; color: var(--blue); }
+    .stat span { display: block; margin-top: 8px; color: var(--sub); font-size: 13px; font-weight: 900; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 251, 255, .86);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,.65);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .tabs a {
+      flex: 0 0 auto;
+      min-height: 39px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--deep);
+      text-decoration: none;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .tabs a:hover { background: #fff; border-color: var(--line); }
+
+    main { padding: 34px 0 62px; }
+    section { margin-top: 44px; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      font-weight: 950;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--sub);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .grid { display: grid; gap: 18px; }
+    .standings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .schedule-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(96, 171, 226, .26);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    th {
+      background: linear-gradient(90deg, #e9f8ff, #f6fcff);
+      color: var(--deep);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .group-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .side {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .side.away { justify-content: flex-end; text-align: right; }
+    .side.away .logo { order: 2; }
+
+    .logo {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      padding: 3px;
+      border: 1px solid #dceefa;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .team-name {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      line-height: 1.15;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .winner .team-name { color: var(--red); }
+    .versus {
+      min-width: 78px;
+      text-align: center;
+      color: var(--blue);
+      font-size: 19px;
+      font-weight: 950;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #edf8ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .status.done { background: #fff1f1; color: var(--red); }
+
+    .bracket-wrap {
+      position: relative;
+      overflow-x: auto;
+      padding: 32px;
+      min-height: 610px;
+      border: 1px solid rgba(96, 171, 226, .25);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 20% 12%, rgba(255,255,255,.72) 0 58px, transparent 59px),
+        radial-gradient(circle at 82% 78%, rgba(255,255,255,.62) 0 86px, transparent 87px),
+        linear-gradient(135deg, rgba(31, 140, 216, .22), rgba(255,255,255,.72)),
+        #e9f8ff;
+    }
+
+    .bracket-board {
+      position: relative;
+      min-width: 1060px;
+      height: 548px;
+    }
+
+    .bracket-board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 42%, rgba(18,105,189,.16) 42% 44%, transparent 44% 100%),
+        linear-gradient(62deg, transparent 0 55%, rgba(255,255,255,.42) 55% 57%, transparent 57% 100%);
+      opacity: .65;
+      pointer-events: none;
+    }
+
+    .bracket-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 300px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--navy);
+      z-index: 2;
+    }
+
+    .bracket-center small {
+      display: block;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 950;
+      margin-bottom: 8px;
+    }
+
+    .bracket-center strong {
+      display: block;
+      font-size: 44px;
+      line-height: 1.04;
+      font-weight: 950;
+      word-break: keep-all;
+      text-shadow: 0 2px 0 rgba(255,255,255,.82);
+    }
+
+    .bracket-cup {
+      width: 76px;
+      height: 76px;
+      margin: 22px auto 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #fff8dc, #fff);
+      border: 2px solid rgba(232,184,76,.58);
+      color: var(--gold);
+      font-size: 38px;
+      font-weight: 950;
+      box-shadow: 0 14px 30px rgba(10,66,120,.12);
+    }
+
+    .bracket-slot {
+      position: absolute;
+      width: 176px;
+      min-height: 92px;
+      z-index: 2;
+    }
+
+    .bracket-slot.left { left: 0; }
+    .bracket-slot.right { right: 0; }
+    .bracket-slot.pos-1 { top: 0; }
+    .bracket-slot.pos-2 { top: 128px; }
+    .bracket-slot.pos-3 { top: 328px; }
+    .bracket-slot.pos-4 { top: 456px; }
+
+    .bracket-team {
+      position: relative;
+      min-height: 92px;
+      overflow: hidden;
+      border: 1px solid rgba(13, 74, 131, .28);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 16px 32px rgba(10,66,120,.14);
+    }
+
+    .bracket-team::before {
+      content: "";
+      display: block;
+      height: 28px;
+      background: linear-gradient(90deg, var(--blue), #5bbced);
+    }
+
+    .bracket-team .side {
+      justify-content: center;
+      min-height: 62px;
+      padding: 8px 10px 10px;
+      text-align: center;
+    }
+
+    .bracket-team .logo {
+      width: 44px;
+      height: 44px;
+      margin-top: -20px;
+      border: 2px solid #fff;
+      box-shadow: 0 5px 12px rgba(10,66,120,.15);
+    }
+
+    .bracket-team .team-name {
+      font-size: 15px;
+      color: var(--navy);
+    }
+
+    .bracket-score {
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      min-width: 26px;
+      min-height: 24px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 950;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 4px 10px rgba(10,66,120,.14);
+    }
+
+    .bracket-line {
+      position: absolute;
+      z-index: 1;
+      border-color: rgba(7, 61, 120, .62);
+    }
+
+    .bracket-line.left-h1 { left: 176px; top: 46px; width: 74px; border-top: 3px solid; }
+    .bracket-line.left-h2 { left: 176px; top: 174px; width: 74px; border-top: 3px solid; }
+    .bracket-line.left-v1 { left: 250px; top: 46px; height: 128px; border-left: 3px solid; }
+    .bracket-line.left-mid1 { left: 250px; top: 110px; width: 72px; border-top: 3px solid; }
+    .bracket-line.left-h3 { left: 176px; top: 374px; width: 74px; border-top: 3px solid; }
+    .bracket-line.left-h4 { left: 176px; top: 502px; width: 74px; border-top: 3px solid; }
+    .bracket-line.left-v2 { left: 250px; top: 374px; height: 128px; border-left: 3px solid; }
+    .bracket-line.left-mid2 { left: 250px; top: 438px; width: 72px; border-top: 3px solid; }
+    .bracket-line.left-final-v { left: 322px; top: 110px; height: 328px; border-left: 3px solid; }
+    .bracket-line.left-final-h { left: 322px; top: 274px; width: 190px; border-top: 3px solid; }
+
+    .bracket-line.right-h1 { right: 176px; top: 46px; width: 74px; border-top: 3px solid; }
+    .bracket-line.right-h2 { right: 176px; top: 174px; width: 74px; border-top: 3px solid; }
+    .bracket-line.right-v1 { right: 250px; top: 46px; height: 128px; border-left: 3px solid; }
+    .bracket-line.right-mid1 { right: 250px; top: 110px; width: 72px; border-top: 3px solid; }
+    .bracket-line.right-h3 { right: 176px; top: 374px; width: 74px; border-top: 3px solid; }
+    .bracket-line.right-h4 { right: 176px; top: 502px; width: 74px; border-top: 3px solid; }
+    .bracket-line.right-v2 { right: 250px; top: 374px; height: 128px; border-left: 3px solid; }
+    .bracket-line.right-mid2 { right: 250px; top: 438px; width: 72px; border-top: 3px solid; }
+    .bracket-line.right-final-v { right: 322px; top: 110px; height: 328px; border-left: 3px solid; }
+    .bracket-line.right-final-h { right: 322px; top: 274px; width: 190px; border-top: 3px solid; }
+
+    .match-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 11px;
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .match-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .toolbar button {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--deep);
+      padding: 8px 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .toolbar button.active {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .reset-btn { color: var(--red) !important; }
+
+    .match-card { padding: 15px; }
+    .scorer-board {
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .scorer-empty {
+      padding: 22px;
+      color: var(--sub);
+      font-weight: 850;
+      text-align: center;
+    }
+
+    footer {
+      padding: 34px 0 42px;
+      border-top: 1px solid rgba(96,171,226,.3);
+      background:
+        radial-gradient(circle at 18% 0, rgba(255,255,255,.72) 0 68px, transparent 69px),
+        linear-gradient(180deg, rgba(235,248,255,.7), rgba(255,255,255,.96));
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .footer-title {
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .partners {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .partner {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 58px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 12px 28px rgba(10,66,120,.08);
+    }
+
+    .partner img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .partner small {
+      display: block;
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .partner span {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    @media (max-width: 920px) {
+      .hero::before { width: 88vw; opacity: .65; }
+      .dragon-tail { left: 18%; width: 86vw; opacity: .8; }
+      .standings-grid, .schedule-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 22px, 1180px); }
+      .hero { min-height: 420px; padding-top: 34px; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 8px; }
+      th, td { padding: 11px 8px; font-size: 13px; }
+      .match-line { grid-template-columns: 1fr; }
+      .side.away { justify-content: flex-start; text-align: left; }
+      .side.away .logo { order: 0; }
+      .versus { text-align: left; min-width: 0; }
+      .footer-inner { display: block; }
+      .partners { margin-top: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="dragon-tail" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">2026 INHA UNIVERSITY FOOTBALL CUP</span>
+      <h1>인하대학교<br>여의주배 축구대회</h1>
+      <p class="hero-copy">16개 팀이 구름을 가르고 올라와 하나의 우승컵을 향해 겨루는 여의주배. 조별 순위, 토너먼트 흐름, 경기 일정과 결과를 한눈에 확인하세요.</p>
+      <div class="hero-stats" aria-label="대회 정보">
+        <div class="stat"><b>16</b><span>참가팀</span></div>
+        <div class="stat"><b>4</b><span>조별리그</span></div>
+        <div class="stat"><b>8</b><span>본선 진출팀</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap tabs">
+      <a href="#standings">조별 순위</a>
+      <a href="#bracket">토너먼트</a>
+      <a href="#scorers">득점자 현황</a>
+      <a href="#schedule">경기 일정 · 결과</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="standings">
+      <div class="section-head">
+        <h2>조별 순위</h2>
+        <p>승점 · 골득실 · 다득점 순 자동 정렬</p>
+      </div>
+      <div class="grid standings-grid" id="standingsTables"></div>
+    </section>
+
+    <section id="bracket">
+      <div class="section-head">
+        <h2>토너먼트 브래킷</h2>
+        <p>양쪽 8강에서 결승으로 모이는 본선 대진</p>
+      </div>
+      <div class="bracket-wrap">
+        <div class="bracket" id="bracketGrid"></div>
+      </div>
+    </section>
+
+    <section id="scorers">
+      <div class="section-head">
+        <h2>득점자 현황</h2>
+        <p>팀 마크 · 팀 이름 · 번호 · 골 수</p>
+      </div>
+      <div class="card scorer-board" id="scorerBoard"></div>
+    </section>
+
+    <section id="schedule">
+      <div class="section-head">
+        <h2>경기 일정 · 결과 입력</h2>
+        <p id="resultSummary">결과 집계 중</p>
+      </div>
+      <div class="toolbar" id="filters"></div>
+      <div class="grid schedule-grid" id="matchList"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-title">인하대학교 여의주배 축구대회</div>
+      <div class="partners">
+        <div class="partner">
+          <img src="assets/인하대학교.jpg" alt="인하대학교 로고">
+          <div><small>후원</small><span>인하대학교</span></div>
+        </div>
+        <div class="partner">
+          <img src="assets/동아리연합회.jpg" alt="인하대학교 동아리연합회 로고">
+          <div><small>후원</small><span>인하대학교 동아리연합회</span></div>
+        </div>
+        <div class="partner">
+          <img src="assets/INHA FC.jpg" alt="INHA FC 로고">
+          <div><small>주관 · 주최</small><span>INHA FC</span></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const DATA = {
+      groups: {
+        A: ["INHA FC", "BEF", "LANDVIBE", "MESIA"],
+        B: ["FC DND", "PROOF", "D_Soccer", "SIOL"],
+        C: ["VICTOR FC", "FC DDOKKI", "FC AUTOBAHN", "LIA FC"],
+        D: ["MASC", "PASC", "ASCII FC", "IMST"]
+      },
+      logos: {
+        "ASCII FC": "ASCII FC.jpg",
+        "BEF": "BEF.jpg",
+        "D_Soccer": "D_Soccer.jpg",
+        "FC AUTOBAHN": "FC AUTOBAHN.jpg",
+        "FC DDOKKI": "FC DDOKKI.jpg",
+        "FC DND": "FC DND.jpg",
+        "IMST": "IMST.jpg",
+        "INHA FC": "INHA FC.jpg",
+        "LANDVIBE": "LANDVIBE.jpg",
+        "LIA FC": "LIA FC.jpg",
+        "MASC": "MASC.jpg",
+        "MESIA": "MESIA.jpg",
+        "PASC": "PASC.jpg",
+        "PROOF": "PROOF.jpg",
+        "SIOL": "SIOL.jpg",
+        "VICTOR FC": "VICTOR FC.jpg"
+      },
+      matches: [
+        ["g01", "group", "A", "2026-05-04", "월", "08:00~09:00", "A1", "A2", [2, 0]],
+        ["g02", "group", "B", "2026-05-04", "월", "09:00~10:00", "B3", "B4", null],
+        ["g03", "group", "B", "2026-05-04", "월", "21:00~22:00", "B1", "B2", null],
+        ["g04", "group", "A", "2026-05-06", "수", "08:00~09:00", "A3", "A4", null],
+        ["g05", "group", "C", "2026-05-06", "수", "09:00~10:00", "C1", "C2", null],
+        ["g06", "group", "C", "2026-05-06", "수", "18:00~19:00", "C3", "C4", null],
+        ["g07", "group", "D", "2026-05-06", "수", "19:00~20:00", "D1", "D2", null],
+        ["g08", "group", "D", "2026-05-07", "목", "08:00~09:00", "D3", "D4", null],
+        ["g09", "group", "B", "2026-05-07", "목", "09:00~10:00", "B1", "B3", null],
+        ["g10", "group", "B", "2026-05-07", "목", "20:00~21:00", "B2", "B4", null],
+        ["g11", "group", "A", "2026-05-07", "목", "21:00~22:00", "A1", "A3", null],
+        ["g12", "group", "A", "2026-05-11", "월", "08:00~09:00", "A2", "A4", null],
+        ["g13", "group", "C", "2026-05-11", "월", "09:00~10:00", "C1", "C3", null],
+        ["g14", "group", "C", "2026-05-11", "월", "20:00~21:00", "C2", "C4", null],
+        ["g15", "group", "D", "2026-05-11", "월", "21:00~22:00", "D1", "D3", null],
+        ["g16", "group", "D", "2026-05-13", "수", "08:00~09:00", "D2", "D4", null],
+        ["g17", "group", "A", "2026-05-13", "수", "09:00~10:00", "A1", "A4", null],
+        ["g18", "group", "A", "2026-05-13", "수", "18:00~19:00", "A2", "A3", null],
+        ["g19", "group", "B", "2026-05-13", "수", "19:00~20:00", "B2", "B3", null],
+        ["g20", "group", "B", "2026-05-13", "수", "20:00~21:00", "B1", "B4", null],
+        ["g21", "group", "C", "2026-05-13", "수", "21:00~22:00", "C1", "C4", null],
+        ["g22", "group", "C", "2026-05-14", "목", "08:00~09:00", "C2", "C3", null],
+        ["g23", "group", "D", "2026-05-14", "목", "09:00~10:00", "D1", "D4", null],
+        ["g24", "group", "D", "2026-05-14", "목", "21:00~22:00", "D2", "D3", null],
+        ["q1", "knockout", "8강 ①", "2026-05-18", "월", "18:00~19:00", "A조 1위", "B조 2위", null],
+        ["q2", "knockout", "8강 ②", "2026-05-18", "월", "19:00~20:00", "B조 1위", "A조 2위", null],
+        ["q3", "knockout", "8강 ③", "2026-05-18", "월", "20:00~21:00", "C조 1위", "D조 2위", null],
+        ["q4", "knockout", "8강 ④", "2026-05-18", "월", "21:00~22:00", "D조 1위", "C조 2위", null],
+        ["s1", "knockout", "준결승", "2026-05-20", "수", "18:00~19:00", "① 승자", "② 승자", null],
+        ["s2", "knockout", "준결승", "2026-05-20", "수", "19:00~20:00", "③ 승자", "④ 승자", null],
+        ["p3", "knockout", "3.4위전", "2026-05-21", "목", "18:00~19:00", "준결승 패자", "준결승 패자", null],
+        ["final", "knockout", "결승전", "2026-05-21", "목", "19:00~20:00", "준결승 승자", "준결승 승자", null]
+      ],
+      scorers: {
+        "g01": { home: "", away: "" }
+      }
+    };
+
+    const slotMap = Object.fromEntries(Object.entries(DATA.groups).flatMap(([group, teams]) =>
+      teams.map((team, index) => [`${group}${index + 1}`, team])
+    ));
+    let activeFilter = "all";
+
+    function getMatch(tuple, seedMap = {}) {
+      const [id, type, group, date, day, time, homeSlot, awaySlot, baseScore] = tuple;
+      return {
+        id, type, group, date, day, time,
+        homeSlot, awaySlot,
+        home: slotMap[homeSlot] || seedMap[homeSlot] || homeSlot,
+        away: slotMap[awaySlot] || seedMap[awaySlot] || awaySlot,
+        score: baseScore
+      };
+    }
+
+    function logo(team) {
+      const file = DATA.logos[team];
+      return file ? `assets/${file}` : "";
+    }
+
+    function teamMarkup(team, extra = "") {
+      const src = logo(team);
+      const image = src ? `<img class="logo" src="${src}" alt="${team} 로고">` : `<span class="logo" aria-hidden="true"></span>`;
+      return `<div class="side ${extra}">${image}<span class="team-name">${team}</span></div>`;
+    }
+
+    function formatDate(date, day) {
+      const [, month, dateNum] = date.split("-");
+      return `${Number(month)}/${Number(dateNum)} ${day}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function computeStandings() {
+      const rows = {};
+      for (const [group, teams] of Object.entries(DATA.groups)) {
+        rows[group] = Object.fromEntries(teams.map(team => [team, { team, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, gd: 0, pts: 0 }]));
+      }
+
+      DATA.matches.map(getMatch).filter(match => match.type === "group" && match.score).forEach(match => {
+        const home = rows[match.group][match.home];
+        const away = rows[match.group][match.away];
+        const [h, a] = match.score;
+        home.p += 1; away.p += 1;
+        home.gf += h; home.ga += a; away.gf += a; away.ga += h;
+        if (h > a) { home.w += 1; away.l += 1; home.pts += 3; }
+        else if (h < a) { away.w += 1; home.l += 1; away.pts += 3; }
+        else { home.d += 1; away.d += 1; home.pts += 1; away.pts += 1; }
+        home.gd = home.gf - home.ga;
+        away.gd = away.gf - away.ga;
+      });
+
+      return Object.fromEntries(Object.entries(rows).map(([group, teams]) => [
+        group,
+        Object.values(teams).sort((a, b) =>
+          b.pts - a.pts || b.gd - a.gd || b.gf - a.gf || a.team.localeCompare(b.team)
+        )
+      ]));
+    }
+
+    function groupIsComplete(group) {
+      const groupMatches = DATA.matches
+        .map(tuple => getMatch(tuple))
+        .filter(match => match.type === "group" && match.group === group);
+      return groupMatches.length === 6 && groupMatches.every(match => match.score);
+    }
+
+    function createSeedMap(standings) {
+      return Object.fromEntries(Object.entries(standings).flatMap(([group, rows]) => {
+        if (!groupIsComplete(group)) return [];
+        return [
+          [`${group}조 1위`, rows[0].team],
+          [`${group}조 2위`, rows[1].team]
+        ];
+      }));
+    }
+
+    function getResolvedMatches() {
+      const standings = computeStandings();
+      const seedMap = createSeedMap(standings);
+      return DATA.matches.map(tuple => getMatch(tuple, seedMap));
+    }
+
+    function parseScorerText(text) {
+      return text
+        .split(/[,\s]+/)
+        .map(token => token.trim())
+        .filter(Boolean)
+        .map(token => {
+          const match = token.match(/^(.+?)(?:[xX*:\-](\d+))?$/);
+          return {
+            number: match ? match[1].trim() : token,
+            goals: match && match[2] ? Number(match[2]) : 1
+          };
+        })
+        .filter(item => item.number && Number.isFinite(item.goals) && item.goals > 0);
+    }
+
+    function computeScorers() {
+      const scorerInput = DATA.scorers || {};
+      const totals = new Map();
+
+      getResolvedMatches().forEach(match => {
+        const entry = scorerInput[match.id] || {};
+        [
+          [match.home, entry.home || ""],
+          [match.away, entry.away || ""]
+        ].forEach(([team, text]) => {
+          parseScorerText(text).forEach(({ number, goals }) => {
+            const key = `${team}::${number}`;
+            const prev = totals.get(key) || { team, number, goals: 0 };
+            prev.goals += goals;
+            totals.set(key, prev);
+          });
+        });
+      });
+
+      return [...totals.values()].sort((a, b) =>
+        b.goals - a.goals || a.team.localeCompare(b.team) || String(a.number).localeCompare(String(b.number), "ko", { numeric: true })
+      );
+    }
+
+    function renderStandings() {
+      const standings = computeStandings();
+      document.getElementById("standingsTables").innerHTML = Object.entries(standings).map(([group, rows]) => `
+        <table class="card" aria-label="${group}조 순위">
+          <thead>
+            <tr>
+              <th colspan="2"><span class="group-label">${group}</span>${group}조</th>
+              <th class="num">경기</th>
+              <th class="num">승</th>
+              <th class="num">무</th>
+              <th class="num">패</th>
+              <th class="num">승점</th>
+              <th class="num">득실</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((row, index) => `
+              <tr>
+                <td class="num">${index + 1}</td>
+                <td>${teamMarkup(row.team)}</td>
+                <td class="num">${row.p}</td>
+                <td class="num">${row.w}</td>
+                <td class="num">${row.d}</td>
+                <td class="num">${row.l}</td>
+                <td class="num"><b>${row.pts}</b></td>
+                <td class="num">${row.gd > 0 ? "+" : ""}${row.gd}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `).join("");
+    }
+
+    function renderFilters() {
+      const filters = [
+        ["all", "전체"],
+        ["group", "조별리그"],
+        ["knockout", "본선"],
+        ["done", "결과 완료"],
+        ["todo", "예정"]
+      ];
+      document.getElementById("filters").innerHTML = filters.map(([key, label]) =>
+        `<button type="button" class="${activeFilter === key ? "active" : ""}" data-filter="${key}">${label}</button>`
+      ).join("");
+
+      document.querySelectorAll("[data-filter]").forEach(button => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.filter;
+          renderAll();
+        });
+      });
+
+    }
+
+    function includeMatch(match) {
+      if (activeFilter === "all") return true;
+      if (activeFilter === "done") return Boolean(match.score);
+      if (activeFilter === "todo") return !match.score;
+      return match.type === activeFilter;
+    }
+
+    function renderMatches() {
+      const matches = getResolvedMatches();
+      const done = matches.filter(match => match.score).length;
+      document.getElementById("resultSummary").textContent = `${done}/${matches.length}경기 결과`;
+      document.getElementById("matchList").innerHTML = matches.filter(includeMatch).map(match => {
+        const score = match.score ? `${match.score[0]} : ${match.score[1]}` : "VS";
+        const homeWinner = match.score && match.score[0] > match.score[1];
+        const awayWinner = match.score && match.score[0] < match.score[1];
+        return `
+          <article class="card match-card" data-match="${match.id}">
+            <div class="match-top">
+              <span>${formatDate(match.date, match.day)} · ${match.time}</span>
+              <span class="status ${match.score ? "done" : ""}">${match.group}</span>
+            </div>
+            <div class="match-line">
+              <div class="${homeWinner ? "winner" : ""}">${teamMarkup(match.home)}</div>
+              <div class="versus">${score}</div>
+              <div class="${awayWinner ? "winner" : ""}">${teamMarkup(match.away, "away")}</div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderScorers() {
+      const scorers = computeScorers();
+      const board = document.getElementById("scorerBoard");
+      if (!scorers.length) {
+        board.innerHTML = `<div class="scorer-empty">아직 기록된 득점자가 없습니다.</div>`;
+        return;
+      }
+
+      board.innerHTML = `
+        <table aria-label="득점자 현황">
+          <thead>
+            <tr>
+              <th class="num">순위</th>
+              <th>팀</th>
+              <th class="num">번호</th>
+              <th class="num">골 수</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${scorers.map((row, index) => `
+              <tr>
+                <td class="num">${index + 1}</td>
+                <td>${teamMarkup(row.team)}</td>
+                <td class="num">${escapeHtml(row.number)}</td>
+                <td class="num"><b>${row.goals}</b></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function bracketTeam(team, match, side, pos, isHome) {
+      const score = match.score ? match.score[isHome ? 0 : 1] : "";
+      const winner = match.score && ((isHome && match.score[0] > match.score[1]) || (!isHome && match.score[1] > match.score[0]));
+      return `
+        <div class="bracket-slot ${side} pos-${pos}">
+          <article class="bracket-team ${winner ? "winner" : ""}">
+            ${teamMarkup(team)}
+            ${score !== "" ? `<span class="bracket-score">${score}</span>` : ""}
+          </article>
+        </div>
+      `;
+    }
+
+    function renderBracket() {
+      const matches = Object.fromEntries(getResolvedMatches().map(match => [match.id, match]));
+      document.getElementById("bracketGrid").innerHTML = `
+        <div class="bracket-board">
+          <div class="bracket-center">
+            <small>INHA UNIVERSITY</small>
+            <strong>여의주배<br>8강 대진</strong>
+            <div class="bracket-cup">龍</div>
+          </div>
+
+          ${bracketTeam(matches.q1.home, matches.q1, "left", 1, true)}
+          ${bracketTeam(matches.q1.away, matches.q1, "left", 2, false)}
+          ${bracketTeam(matches.q2.home, matches.q2, "left", 3, true)}
+          ${bracketTeam(matches.q2.away, matches.q2, "left", 4, false)}
+
+          ${bracketTeam(matches.q3.home, matches.q3, "right", 1, true)}
+          ${bracketTeam(matches.q3.away, matches.q3, "right", 2, false)}
+          ${bracketTeam(matches.q4.home, matches.q4, "right", 3, true)}
+          ${bracketTeam(matches.q4.away, matches.q4, "right", 4, false)}
+
+          <i class="bracket-line left-h1"></i>
+          <i class="bracket-line left-h2"></i>
+          <i class="bracket-line left-v1"></i>
+          <i class="bracket-line left-mid1"></i>
+          <i class="bracket-line left-h3"></i>
+          <i class="bracket-line left-h4"></i>
+          <i class="bracket-line left-v2"></i>
+          <i class="bracket-line left-mid2"></i>
+          <i class="bracket-line left-final-v"></i>
+          <i class="bracket-line left-final-h"></i>
+
+          <i class="bracket-line right-h1"></i>
+          <i class="bracket-line right-h2"></i>
+          <i class="bracket-line right-v1"></i>
+          <i class="bracket-line right-mid1"></i>
+          <i class="bracket-line right-h3"></i>
+          <i class="bracket-line right-h4"></i>
+          <i class="bracket-line right-v2"></i>
+          <i class="bracket-line right-mid2"></i>
+          <i class="bracket-line right-final-v"></i>
+          <i class="bracket-line right-final-h"></i>
+        </div>
+      `;
+    }
+
+    function renderAll() {
+      renderStandings();
+      renderBracket();
+      renderScorers();
+      renderFilters();
+      renderMatches();
+    }
+
+    renderAll();
+  </script>
+</body>
+</html>
