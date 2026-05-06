@@ -559,6 +559,66 @@
     .reset-btn { color: var(--red) !important; }
 
     .match-card { padding: 15px; }
+
+    .match-scorers {
+      margin-top: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    .match-scorers summary {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--deep);
+      font-size: 13px;
+      font-weight: 950;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .match-scorers summary::-webkit-details-marker { display: none; }
+
+    .match-scorers summary::after {
+      content: "+";
+      width: 24px;
+      height: 24px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #edf8ff;
+      color: var(--blue);
+      font-weight: 950;
+    }
+
+    .match-scorers[open] summary::after { content: "-"; }
+
+    .match-scorer-panel {
+      display: grid;
+      gap: 8px;
+      padding: 0 0 3px;
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.5;
+    }
+
+    .match-scorer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: #f5fbff;
+    }
+
+    .match-note {
+      color: var(--red);
+      font-weight: 950;
+    }
+
     .scorer-board {
       overflow: hidden;
       background: #fff;
@@ -769,7 +829,7 @@
         ["g02", "group", "B", "2026-05-04", "월", "09:00~10:00", "B3", "B4", [0, 4]],
         ["g03", "group", "B", "2026-05-04", "월", "21:00~22:00", "B1", "B2", [1, 0]],
         ["g04", "group", "A", "2026-05-06", "수", "08:00~09:00", "A3", "A4", [1, 0]],
-        ["g05", "group", "C", "2026-05-06", "수", "09:00~10:00", "C1", "C2", null],
+        ["g05", "group", "C", "2026-05-06", "수", "09:00~10:00", "C1", "C2", [3, 0]],
         ["g06", "group", "C", "2026-05-06", "수", "18:00~19:00", "C3", "C4", null],
         ["g07", "group", "D", "2026-05-06", "수", "19:00~20:00", "D1", "D2", null],
         ["g08", "group", "D", "2026-05-07", "목", "08:00~09:00", "D3", "D4", null],
@@ -802,7 +862,11 @@
         "g01": { home: "47,77", away: "" },
         "g02": { home: "", away: "10x4" },
         "g03": { home: "19", away: "" },
-        "g04": { home: "6", away: "" }
+        "g04": { home: "6", away: "" },
+        "g05": { home: "", away: "" }
+      },
+      notes: {
+        "g05": "몰수승"
       }
     };
 
@@ -936,6 +1000,27 @@
       );
     }
 
+    function formatScorerList(text) {
+      const scorers = parseScorerText(text);
+      if (!scorers.length) return "기록 없음";
+      return scorers.map(item => `${escapeHtml(item.number)}번 ${item.goals}골`).join(", ");
+    }
+
+    function matchScorerDetails(match) {
+      const entry = (DATA.scorers || {})[match.id] || {};
+      const note = DATA.notes && DATA.notes[match.id] ? `<div class="match-note">${escapeHtml(DATA.notes[match.id])}</div>` : "";
+      return `
+        <details class="match-scorers">
+          <summary>득점자 보기</summary>
+          <div class="match-scorer-panel">
+            ${note}
+            <div class="match-scorer-row"><span>${escapeHtml(match.home)}</span><b>${formatScorerList(entry.home || "")}</b></div>
+            <div class="match-scorer-row"><span>${escapeHtml(match.away)}</span><b>${formatScorerList(entry.away || "")}</b></div>
+          </div>
+        </details>
+      `;
+    }
+
     function renderStandings() {
       const standings = computeStandings();
       document.getElementById("standingsTables").innerHTML = Object.entries(standings).map(([group, rows]) => `
@@ -1016,6 +1101,7 @@
               <div class="versus">${score}</div>
               <div class="${awayWinner ? "winner" : ""}">${teamMarkup(match.away, "away")}</div>
             </div>
+            ${matchScorerDetails(match)}
           </article>
         `;
       }).join("");
