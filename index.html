@@ -631,6 +631,21 @@
       text-align: center;
     }
 
+    .scorer-board tr.extra-scorer { display: none; }
+    .scorer-board.expanded tr.extra-scorer { display: table-row; }
+
+    .scorer-toggle {
+      width: calc(100% - 24px);
+      min-height: 42px;
+      margin: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f5fbff;
+      color: var(--deep);
+      font-weight: 950;
+      cursor: pointer;
+    }
+
     footer {
       padding: 34px 0 42px;
       border-top: 1px solid rgba(96,171,226,.3);
@@ -1123,6 +1138,7 @@
         return;
       }
 
+      board.classList.remove("expanded");
       board.innerHTML = `
         <table aria-label="득점자 현황">
           <thead>
@@ -1135,7 +1151,7 @@
           </thead>
           <tbody>
             ${scorers.map((row, index) => `
-              <tr>
+              <tr class="${index >= 10 ? "extra-scorer" : ""}">
                 <td class="num">${index + 1}</td>
                 <td>${teamMarkup(row.team)}</td>
                 <td class="num">${escapeHtml(row.number)}</td>
@@ -1144,7 +1160,16 @@
             `).join("")}
           </tbody>
         </table>
+        ${scorers.length > 10 ? `<button class="scorer-toggle" type="button" id="scorerToggle">전체 득점자 보기</button>` : ""}
       `;
+
+      const toggle = document.getElementById("scorerToggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const expanded = board.classList.toggle("expanded");
+          toggle.textContent = expanded ? "상위 10명만 보기" : "전체 득점자 보기";
+        });
+      }
     }
 
     function bracketTeam(team, match, side, pos, isHome) {
